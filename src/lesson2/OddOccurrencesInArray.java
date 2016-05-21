@@ -1,3 +1,4 @@
+package lesson2;
 import java.util.*;
 
 /**
@@ -44,7 +45,7 @@ import java.util.*;
  비어있지 않은 0부터 시작하는 배열 A는 숫자 N개를 포함한다.
  배열의 요소 갯수는 홀수고, 같은 값이 없는 한 요소를 제외한 각 요소는 다른 요소와 같은 값으로 짝을 이루게 된다.
 
- 상기 요구사항을 만족하는 요소 수 N개의 배열 A가 주어지면 짝이 없는 요로를 리턴해라.
+ 상기 요구사항을 만족하는 요소 수 N개의 배열 A가 주어지면 짝이 없는 요소를 리턴해라.
 
  N 은 [1..1,000,000] 범위의 홀수
  A의 각 요소의 범위는 [1..1,000,000,000]
@@ -60,7 +61,7 @@ public class OddOccurrencesInArray {
 
 	public static int solution(int[] A){
 		int N = A.length;
-		HashSet<Integer> hashSet = new HashSet();
+		HashSet<Integer> hashSet = new HashSet<Integer>();
 		for (int i = 0; i < N; i++) {
 			int value = A[i];
 			if ( !hashSet.remove(value)) {
