@@ -1,7 +1,5 @@
 package lesson3;
 
-import java.util.ArrayList;
-
 /**
  A non-empty zero-indexed array A consisting of N integers is given. Array A represents numbers on a tape.
 
