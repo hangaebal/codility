@@ -167,7 +167,7 @@ public class MinAvgTwoSlice {
 		return index;
 	}
 
-	public static void main(String[] arg) {
+	public static void main(String[] args) {
 		int result = solution(A);
 		System.out.println(result);
 	}
