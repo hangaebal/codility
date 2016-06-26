@@ -1,5 +1,7 @@
 package lesson6;
 
+import java.util.Arrays;
+
 /**
 A non-empty zero-indexed array A consisting of N integers is given.
 The product of triplet (P, Q, R) equates to A[P] * A[Q] * A[R] (0 ≤ P < Q < R < N).
@@ -90,5 +92,26 @@ N개의 정수로 구성된 비어 있지 않은 배열 A가 주어지고, 세 �
 
  */
 public class MaxProductOfThree {
+	public static int solution(int[] A) {
+		int N = A.length;
+
+		Arrays.sort(A);
+
+		int maxProduct = A[N - 1] * A[N - 2] * A[N - 3];
+		if (A[0] < 0 && A[1] < 0) {
+			int minusProduct = A[0] * A[1] * A[N - 1];
+			if (minusProduct > maxProduct) {
+				maxProduct = minusProduct;
+			}
+		}
+
+
+		return maxProduct;
+	}
+
+	public static void main(String[] args) {
+		int[] A = {-3,1,2,-2,-5,6};
+		System.out.println(solution(A));
+	}
 
 }
