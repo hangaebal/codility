@@ -1,5 +1,8 @@
 package lesson6;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
 We draw N discs on a plane. The discs are numbered from 0 to N − 1.
 A zero-indexed array A of N non-negative integers, specifying the radiuses of the discs, is given.
@@ -80,5 +83,77 @@ class Solution { public int solution(int[] A); }
 입력된 배열의 요소는 수정할 수 있다.
  */
 public class NumberOfDiscIntersections {
+	/**
+	 * Correctness : 100%
+	 * Performance : 25%
+	 * Task : 62%
+	 */
+	public int solution1(int[] A){
+		int N = A.length;
+		long result = 0;
 
+		for (int i = 0; i < N - 1; i++) {
+			for (int j = i + 1; j < N; j++) {
+				long iMax = Math.min((long)i + A[i], N);
+				long jMin = Math.max((long)j - A[j], 0);
+				if (iMax >= jMin) {
+					result++;
+					if (result > 10E6) {
+						return -1;
+					}
+				}
+			}
+		}
+
+		return (int) result;
+	}
+
+	/**
+	 * Task : 100%
+	 */
+	public static int solution(int[] A){
+		class Circle {
+			long min;
+			long max;
+		}
+
+		int N = A.length;
+		Circle[] circles = new Circle[N];
+
+		for (int i = 0; i < N; i++) {
+			Circle circle = new Circle();
+			circle.min = (long)i - A[i];
+			circle.max = (long)i + A[i];
+			circles[i] = circle;
+		}
+
+		Arrays.sort(circles, new Comparator<Circle>() {
+			@Override
+			public int compare(Circle o1, Circle o2) {
+				if (o1.min > o2.min) {
+					return 1;
+				} else {
+					return -1;
+				}
+			}
+		});
+
+		int count = 0;
+		for (int i = 0; i < N - 1; i++) {
+			for (int j = i + 1; j < N && circles[i].max >= circles[j].min; j++) {
+				count++;
+				if (count > 10E6) {
+					return -1;
+				}
+			}
+		}
+
+		return count;
+	}
+
+	public static void main(String[] args) {
+		int[] A = {1,5,2,1,4,0};
+		//int[] A = {1,2147483647,0};
+		System.out.println(solution(A));
+	}
 }
