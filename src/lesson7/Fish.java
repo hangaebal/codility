@@ -1,4 +1,7 @@
 package lesson7;
+
+import java.util.Stack;
+
 /**
 You are given two non-empty zero-indexed arrays A and B consisting of N integers. 
 Arrays A and B represent N voracious fish in a river,
@@ -105,5 +108,39 @@ N개의 정수로 구성된 배열 A와 B가 주어지고, 살아남은 물고�
 배열의 요소는 수정될 수 있다.
  */
 public class Fish {
+	public static int solution(int[] A, int[] B) {
+		int N = A.length;
+		int alive = N;
+		Stack<Integer> downFishStack = new Stack<>();
+		
+		for (int i = 0; i < N; i++) {
+			if (B[i] == 0) {	// up
+				if ( !downFishStack.empty()) {
+					while ( !downFishStack.empty()) {
+						alive--;
+						if (downFishStack.peek() > A[i]) {
+							break;
+						} else {
+							downFishStack.pop();
+						}
+					}
+				}
+			} else {			// down
+				downFishStack.push(A[i]);
+			}
+		}
+		
+		
+		return alive;
+	}
+	
+	public static void main(String[] args) {
+		/*int[] A = {4,3,2,1,5};
+		int[] B = {0,1,0,0,0};*/
+		int[] A = {4,3,2,6,7,1,10,9,5,8};
+		int[] B = {0,1,1,1,1,0,0,0,0,1};
+		System.out.println(solution(A, B));
+	}
+	
 	
 }
