@@ -52,5 +52,52 @@ S = "([)()]" 가 주어지면 위에서 설명한 것처럼 함수는 0을 리�
 	- 최악의 공간 복잡도는 O(N) (입력 공간 제외). 
  */
 public class Brackets {
+	public static int solution(String S) {
+		int result = 1;
+		int N = S.length();
+		
+		Stack<Character> stack = new Stack<>();
+		for (int i = 0; i < N; i++) {
+			char c = S.charAt(i);
+			
+			if (c == '(' || c == '{' || c == '[' ) {
+				stack.push(c);
+			} else {
+				if (stack.empty()) {
+					return 0;
+				}
+				
+				if (c == ']') {
+					if (stack.pop() != '[') {
+						return 0;
+					}
+				} else if (c == '}') {
+					if (stack.pop() != '{') {
+						return 0;
+					}
+				} else if (c == ')') {
+					if (stack.pop() != '(') {
+						return 0;
+					}
+				}
+			}
+			System.out.println(stack);
+		}
+		
+		if ( !stack.isEmpty()) {
+			return 0;
+		}
+		
+		return result;
+	}
 	
+	
+	public static void main(String[] args) {
+		//String S = "{[()()]}";
+		//String S = "([)()]";
+		String S = "{[())}";
+		System.out.println(solution(S));
+	}
+	
+
 }
