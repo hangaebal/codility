@@ -2,8 +2,6 @@ package lesson7;
 
 import java.util.Stack;
 
-import com.sun.security.auth.SolarisNumericUserPrincipal;
-
 /**
 A string S consisting of N characters is considered to be properly nested 
 if any of the following conditions is true:
