@@ -1,5 +1,7 @@
 package lesson7;
 
+import java.util.Stack;
+
 /**
 
 A string S consisting of N characters is called properly nested if:
@@ -10,7 +12,7 @@ A string S consisting of N characters is called properly nested if:
 For example, string "(()(())())" is properly nested but string "())" isn't.
 
 Write a function:
-	int solution(char *S);
+	class Solution { public int solution(String S); }
 that, given a string S consisting of N characters, 
 returns 1 if string S is properly nested and 0 otherwise.
 
@@ -36,12 +38,12 @@ N개의 문자로 구성된 문자열 S가 만약 다음과 같다면 제대로 
 예를 들어, 문자열 "(()(())())"는 제대로 중첩되었지만, "())" 는 그렇지 않다.
 
 함수 작성:
-	int solution(char *S);
+	class Solution { public int solution(String S); }
 N개의 문자로 구성된 문자열 S가 주어지고, 만약 문자열 S가 제대로 중첩되었다면 1을, 
 그렇지 않다면 0을 리턴한다.
-
+			
 예를 들어, S = "(()(())())" 가 주어지면 함수는 1을 리턴해야 하고,
-S = "())"가 주어지면 위에서 설명한 것처럼 함수는 0을 리턴해야 한다.
+S = "())"가 주어지면 위에서 설명한 것처럼 함수는 0을 리턴해야 한.
 
 가정:
 	- N은 [0..1,000,000] 범위의 정수;
@@ -52,5 +54,35 @@ S = "())"가 주어지면 위에서 설명한 것처럼 함수는 0을 리턴해
 	- 최악의 공간 복잡도는 O(1) (입력공간 제외)
  */
 public class Nesting {
+	public static int solution(String S) {
+		int N = S.length();
+		
+		Stack<Character> stack = new Stack<>();
+		for (int i = 0; i < N; i++) {
+			char c = S.charAt(i);
+			
+			if (c == '(') {
+				stack.push(c);
+			} else if (c == ')') {
+				if (stack.isEmpty()) {
+					return 0;
+				}
+				
+				if (stack.pop() != '(') {
+					return 0;
+				}
+			}
+		}
+		
+		if ( !stack.isEmpty()) {
+			return 0;
+		}
+		
+		return 1;
+	}
 
+	public static void main(String[] args) {
+		String S = "(()(())())";
+		System.out.println(solution(S));
+	}
 }
